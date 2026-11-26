@@ -1,4 +1,4 @@
-extends Node
+﻿extends Node
 ## 上下文洞察插件 · local-harness
 ## 工具：context_stats / context_digest
 ##
@@ -44,7 +44,7 @@ func _stats() -> Dictionary:
 	for m in msgs:
 		all_text += str(m.get("content", ""))
 	var used := _est_tokens(all_text)
-	var pct := 0.0 if ctx <= 0 else float(used) / float(ctx) * 100.0
+	var pct: float = 0.0 if ctx <= 0 else float(used) / float(ctx) * 100.0
 	return {"ok": true, "output": "消息 %d 条 · 字数 %d · 估算 %d tokens · 上下文 %d（占 %.1f%%）· 余量约 %d tokens" % [
 		msgs.size(), chars, used, ctx, pct, max(0, ctx - used)]}
 
@@ -55,15 +55,16 @@ func _digest(args: Dictionary) -> Dictionary:
 		return {"ok": false, "output": "还没有对话"}
 	var keep := int(args.get("keep", 4))
 	var msgs: Array = chat.get("messages", [])
-	var cut := max(0, msgs.size() - keep * 2)
+	var cut: int = max(0, msgs.size() - keep * 2)
 	if cut <= 0:
 		return {"ok": true, "output": "对话还不够长，不用压缩"}
 	var head: Array = msgs.slice(0, cut)
 	var lines: PackedStringArray = []
 	for m in head:
-		var role := "用户" if str(m.get("role", "")) == "user" else "助手"
+		var role: String = "用户" if str(m.get("role", "")) == "user" else "助手"
 		var t := str(m.get("content", ""))
 		if t.length() > 120:
 			t = t.substr(0, 120) + "…"
 		lines.append("%s：%s" % [role, t])
 	return {"ok": true, "output": "早期 %d 条消息（可用来做摘要）：\n%s" % [head.size(), "\n".join(lines)]}
+
