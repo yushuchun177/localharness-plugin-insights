@@ -40,7 +40,10 @@ func _stats() -> Dictionary:
 	for m in msgs:
 		chars += str(m.get("content", "")).length()
 	var ctx := int(App.cfg.get("ctx", 4096))
-	var used := _est_tokens("".join(msgs.map(func(m): return str(m.get("content", "")))))
+	var all_text := ""
+	for m in msgs:
+		all_text += str(m.get("content", ""))
+	var used := _est_tokens(all_text)
 	var pct := 0.0 if ctx <= 0 else float(used) / float(ctx) * 100.0
 	return {"ok": true, "output": "消息 %d 条 · 字数 %d · 估算 %d tokens · 上下文 %d（占 %.1f%%）· 余量约 %d tokens" % [
 		msgs.size(), chars, used, ctx, pct, max(0, ctx - used)]}
