@@ -1,0 +1,25 @@
+{
+  "id": "insights",
+  "name": "上下文洞察",
+  "name_en": "Context insights",
+  "version": "0.1.0",
+  "description": "看一眼当前对话有多大：消息数、字数、估算 token、还能塞多少；以及把早期历史压成摘要。",
+  "description_en": "Inspect the current conversation size (messages, chars, estimated tokens, headroom) and compress early history into a summary.",
+  "author": "yushuchun177",
+  "homepage": "https://github.com/yushuchun177/localharness-plugin-insights",
+  "min_app": "0.1.0",
+  "tools": [
+    {
+      "name": "context_stats",
+      "description": "返回当前会话的统计：消息数、总字数、估算 token 数、上下文余量。",
+      "params": {}
+    },
+    {
+      "name": "context_digest",
+      "description": "把最近 N 轮之前的对话压成一段摘要文本（不直接改历史，只返回摘要）。",
+      "params": {
+        "keep": "int，可选，保留最近几轮，默认 4"
+      }
+    }
+  ]
+}
