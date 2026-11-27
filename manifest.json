@@ -3,6 +3,7 @@
   "name": "上下文洞察",
   "name_en": "Context insights",
   "version": "0.1.0",
+  "license": "GPL-3.0",
   "description": "看一眼当前对话有多大：消息数、字数、估算 token、还能塞多少；以及把早期历史压成摘要。",
   "description_en": "Inspect the current conversation size (messages, chars, estimated tokens, headroom) and compress early history into a summary.",
   "author": "yushuchun177",
