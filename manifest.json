@@ -8,18 +8,33 @@
   "author": "yushuchun177",
   "homepage": "https://github.com/yushuchun177/localharness-plugin-insights",
   "min_app": "0.1.0",
+  "requires": {
+    "os": "全平台",
+    "deps": [],
+    "disk": "0",
+    "memory": "约 2 MB",
+    "network": false
+  },
   "tools": [
     {
       "name": "context_stats",
       "description": "返回当前会话的统计：消息数、总字数、估算 token 数、上下文余量。",
-      "params": {}
+      "params": {},
+      "level": "read",
+      "needs": [
+        "当前会话"
+      ]
     },
     {
       "name": "context_digest",
       "description": "把最近 N 轮之前的对话压成一段摘要文本（不直接改历史，只返回摘要）。",
       "params": {
         "keep": "int，可选，保留最近几轮，默认 4"
-      }
+      },
+      "level": "read",
+      "needs": [
+        "当前会话"
+      ]
     }
   ]
 }
